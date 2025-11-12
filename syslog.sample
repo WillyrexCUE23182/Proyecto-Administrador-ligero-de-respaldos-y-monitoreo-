@@ -1,0 +1,25 @@
+Nov 12 08:10:01 localhost kernel: Booting Linux version 5.14.0 (gcc 11.4.1)
+Nov 12 08:10:02 localhost systemd[1]: Started User Login Management.
+Nov 12 08:11:10 localhost CRON[1024]: (root) CMD (run-parts /etc/cron.hourly)
+Nov 12 08:12:45 localhost sshd[1180]: Accepted publickey for uvg from 192.168.1.10 port 55022 ssh2
+Nov 12 08:13:02 localhost audit[1]: SERVICE_START pid=1 uid=0 auid=4294967295 msg='service=start exe="/usr/lib/systemd/systemd"'
+Nov 12 08:15:33 localhost systemd[1]: Starting rsync backup job...
+Nov 12 08:15:34 localhost rsync[1387]: rsync run started (pid 1387)
+Nov 12 08:15:34 localhost rsync[1387]: filelist generation completed
+Nov 12 08:15:35 localhost rsync[1387]: backup completed successfully
+
+# A partir de aquí, líneas “ruidosas” sin error:
+Nov 12 09:00:00 localhost CRON[2020]: (root) CMD (db-backup daily)
+Nov 12 09:05:47 localhost NetworkManager[900]: device state changed
+Nov 12 09:10:18 localhost docker[1501]: container healthy
+
+# Ejemplos con palabras clave que el monitor debería detectar:
+Nov 12 09:12:01 localhost appX[2100]: critical: database connection timeout
+Nov 12 09:12:04 localhost appY[2101]: error: failed to open file /var/lib/state
+Nov 12 09:12:06 localhost kernel: segfault at 000000000 ip 00007f err 4 in libc-2.34.so[...]
+Nov 12 09:12:10 localhost appY[2101]: panic: unrecoverable state reached
+Nov 12 09:12:18 localhost serviceZ[2202]: fail: retrying action after error
+
+# Más líneas normales:
+Nov 12 09:20:01 localhost CRON[2300]: (root) CMD (logrotate)
+Nov 12 09:25:44 localhost systemd[1]: Finished Rotate log files.
